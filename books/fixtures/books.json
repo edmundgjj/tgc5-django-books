@@ -1,1 +1,20 @@
-[{"model": "books.book", "pk": 1, "fields": {"title": "The Lord of the Rings", "ISBN": "12345678", "desc": "A Hobbit must destroy a dangerous piece of jewllery"}}, {"model": "books.book", "pk": 2, "fields": {"title": "Romance of the Three Kingdoms", "ISBN": "456456", "desc": "Three Emperors play mind games with each other."}}]
+[
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "title": "The Lord of the Rings",
+      "ISBN": "12345678",
+      "desc": "A Hobbit must destroy a dangerous piece of jewllery"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "title": "Romance of the Three Kingdoms",
+      "ISBN": "456456",
+      "desc": "Three Emperors play mind games with each other."
+    }
+  }
+]
