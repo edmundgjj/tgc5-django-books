@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.contrib import messages
 from .models import Book
 from .forms import BookForm
 
@@ -17,7 +18,8 @@ def create_book(request):
 
         # check if the form has valid values
         if create_form.is_valid():
-            create_form.save()
+            book = create_form.save()
+            messages.success(request, f"New book {book.title} has been created")
             return redirect(reverse(index))
         else:
             # if does not have valid values, re-render the form
