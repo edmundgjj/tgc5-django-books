@@ -12,13 +12,15 @@
   </head>
   <body>
     <div class="container">
-        <div class='alert alert-success'>
-            {% if messages %}
+        {% if messages %}
+        <div class="alert alert-success">
+            
             <div>
                 {% for message in messages %} {{ message }} {% endfor %}
             </div>
-            {% endif %}
         </div>
+        {% endif %}
+
 
     {%block content%}{%endblock%}
     </div>
