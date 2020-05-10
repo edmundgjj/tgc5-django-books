@@ -23,7 +23,7 @@ def index(request):
         if 'genre' in request.GET and request.GET['genre']:
             print("adding genre")
             genre = request.GET['genre']
-            queries = queries & Q(genre__id__in=genre)
+            queries = queries & Q(genre__in=genre)
 
         books = books.filter(queries)
 
