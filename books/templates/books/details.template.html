@@ -1,0 +1,22 @@
+{% extends 'base.template.html' %}
+
+{% block content %}
+<h1>{{book.title}}</h1>
+<p>
+    ISBN: {{book.isbn}}
+</p>
+<p>
+    Author: {{book.author.first_name}} {{book.author_last_name}}
+</p>
+<p>
+    Genre: {{book.genre.name}}
+</p>
+<p>
+    Tags: {% for t in book.tags %} <span class="label">{{t.name}}</span> {%endfor%}
+</p>
+{%for r in book.reviews %}
+<div class="card">
+    <h3>{{r.title}}</h3>
+</div>
+{%endfor%}
+{% endblock %}
