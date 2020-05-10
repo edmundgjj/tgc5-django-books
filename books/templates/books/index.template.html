@@ -1,8 +1,13 @@
 {% extends 'base.template.html' %}
 {%load static %}
+{% load crispy_forms_tags %}
 
 {%block content%}
     <h1>Books</h1>
+    <form method="GET">
+    {{search_form|crispy}}
+    <input type="submit" value="Search"/>
+    </form>
     <p>
         Here you can see all the books that we have.
     </p>

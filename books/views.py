@@ -1,14 +1,39 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from django.contrib import messages
-from .models import Book
-from .forms import BookForm
+from django.db.models import Q
+from .models import Book, Genre
+from .forms import BookForm, SearchForm
 from reviews.forms import ReviewForm
+
 
 # Create your views here.
 def index(request):
     books = Book.objects.all()
+
+    # if there is any GET queries
+    print(request.GET)
+    if request.GET:
+        # always true query:
+        queries = ~Q(pk__in=[])
+
+        if 'title' in request.GET and request.GET['title']:
+            title = request.GET['title']
+            queries = queries & Q(title__icontains=title)
+
+        if 'genre' in request.GET and request.GET['genre']:
+            print("adding genre")
+            genre = request.GET['genre']
+            queries = queries & Q(genre__id__in=genre)
+
+        books = books.filter(queries)
+
+    genres = Genre.objects.all()
+    search_form = SearchForm(request.GET)
+
     return render(request, 'books/index.template.html', {
-        'books': books
+        'books': books,
+        'genre': genres,
+        'search_form': search_form
     })
 
 
