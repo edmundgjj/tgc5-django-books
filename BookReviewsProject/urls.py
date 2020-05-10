@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('books/', include('books.urls')),
-    path('reviews/create', reviews.views.create_review)
+    path('reviews', reviews.views.show_reviews, name="view_reviews_route"),
+    path('reviews/create/<book_id>', reviews.views.create_review, name="create_review_route")
 ]

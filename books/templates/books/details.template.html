@@ -3,20 +3,29 @@
 {% block content %}
 <h1>{{book.title}}</h1>
 <p>
-    ISBN: {{book.isbn}}
+    ISBN: {{book.ISBN}}
 </p>
 <p>
     Author: {{book.author.first_name}} {{book.author_last_name}}
 </p>
 <p>
-    Genre: {{book.genre.name}}
+    Genre: {{book.genre.title}}
 </p>
 <p>
-    Tags: {% for t in book.tags %} <span class="label">{{t.name}}</span> {%endfor%}
+    Tags: {% for t in book.tags.all %} <span class="label">{{t.title}}</span> {%endfor%}
 </p>
-{%for r in book.reviews %}
+{{book.reviews}}
+{%for r in book.review_set.all %}
 <div class="card">
     <h3>{{r.title}}</h3>
+    {{r.content}}
 </div>
+
+<form method="POST" action="{% url 'create_review_route' book_id=book.id %}">
+{% csrf_token %}
+{{ form|crispy}}
+<input type="submit"/>
+</form>
+
 {%endfor%}
 {% endblock %}

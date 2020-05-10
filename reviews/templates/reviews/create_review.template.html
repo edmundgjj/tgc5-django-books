@@ -2,9 +2,9 @@
 {% load crispy_forms_tags %}
 
 {%block content%}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form|crispy}}
-        <input type="submit"/>
-    </form>
+<form method="POST">
+    {% csrf_token %}
+    {% include 'reviews/reviews_form.template.html' %}
+    <input type="submit">
+</form>
 {%endblock%}

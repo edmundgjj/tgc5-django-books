@@ -25,5 +25,6 @@ class Book(models.Model):
     tags = models.ManyToManyField(Tag)
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
+
     def __str__(self):
         return self.title
