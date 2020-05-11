@@ -10,26 +10,28 @@ from reviews.forms import ReviewForm
 def index(request):
     books = Book.objects.all()
 
-    # if there is any GET queries
-    print(request.GET)
+    # if there is any search queries submitted
     if request.GET:
         # always true query:
         queries = ~Q(pk__in=[])
 
+        # if a title is specified, add it to the query
         if 'title' in request.GET and request.GET['title']:
             title = request.GET['title']
             queries = queries & Q(title__icontains=title)
 
+        # if a genre is specified, add it to the query
         if 'genre' in request.GET and request.GET['genre']:
             print("adding genre")
             genre = request.GET['genre']
             queries = queries & Q(genre__in=genre)
 
+        # update the existing book found
         books = books.filter(queries)
 
     genres = Genre.objects.all()
     search_form = SearchForm(request.GET)
-
+    print(books.query)
     return render(request, 'books/index.template.html', {
         'books': books,
         'genre': genres,
